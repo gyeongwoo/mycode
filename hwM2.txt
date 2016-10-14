@@ -1,0 +1,45 @@
+f = 90*10^3;
+t = [0:(1/f)/1000:(1/f)*2];
+R = 90*10^3;
+L = 90*0.001;
+
+w = 2*pi*f;
+A = 90;
+B = pi/180*90;
+Vst = A*cos(w*t*B);
+Vs = A*exp(1j+B);
+Z = R*1j*w*L;
+ZZ = sqrt((R*R)+((w*L)*(w*L)))*exp(1j*atan(w*L/R));
+I = Vs/ZZ;
+IT = abs(I)*cos(w*t*angle(I));
+VR = R*I;
+VRT = abs(VR)*cos(w*t*angle(VR));
+VL = 1j*w*L*I;
+VLT = abs(VL)*cos(w*t*angle(VL));
+
+
+subplot(2,2,1);
+plot(t,Vst);
+title('전원전압');
+xlabel('t');
+ylabel('Vs(t)');
+
+subplot(2,2,2);
+plot(t,VRT);
+title('전류');
+xlabel('t');
+ylabel('I(t)');
+
+subplot(2,2,3);
+plot(t,VRT);
+title('저항전압');
+xlabel('t');
+ylabel('VR(t)');
+
+subplot(2,2,4);
+plot(t,VLT);
+title('인덕터전압');
+xlabel('t');
+ylabel('VL(t)');
+gtext('20151090변경우');
+
